@@ -9,7 +9,6 @@
 #include <codecvt>
 #include <locale>
 
-// Преобразование из UTF-8 в wstring
 tstring toTString(const std::string& str) {
     if (str.empty()) return L"";
     
@@ -19,7 +18,6 @@ tstring toTString(const std::string& str) {
     return wstrTo;
 }
 
-// Преобразование из wstring в UTF-8
 std::string toString(const tstring& wstr) {
     if (wstr.empty()) return "";
     
@@ -29,7 +27,7 @@ std::string toString(const tstring& wstr) {
     return strTo;
 }
 #else
-// В других ОС просто возвращаем ту же строку
+
 tstring toTString(const std::string& str) {
     return str;
 }
@@ -39,7 +37,6 @@ std::string toString(const tstring& str) {
 }
 #endif
 
-// Реализация класса Logger
 Logger::Logger(const std::string& logPath) {
     logFile.open(logPath, std::ios::app);
 }
@@ -66,7 +63,6 @@ void Logger::log(const std::string& message) {
     logFile << std::put_time(&timeInfo, "[%Y-%m-%d %H:%M:%S] ") << message << std::endl;
 }
 
-// Реализация класса FileManager
 FileManager::FileManager() : running(true) {
     currentPath = fs::current_path();
     registerCommands();
@@ -142,7 +138,6 @@ bool FileManager::isRunning() const {
     return running;
 }
 
-// Реализация команд
 void FileManager::listDirectory(const std::vector<std::string>& args) {
     fs::path path = currentPath;
     
@@ -170,7 +165,6 @@ void FileManager::listDirectory(const std::vector<std::string>& args) {
         std::string entrySize = entry.is_directory() ? "" : 
                                std::to_string(fs::file_size(entry)) + " bytes";
         
-        // Исправленное форматирование вывода
         std::string output = entryType;
         while (output.length() < 10) output += " ";
         output += entry.path().filename().string();
