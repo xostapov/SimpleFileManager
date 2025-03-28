@@ -12,7 +12,6 @@
 
 namespace fs = std::filesystem;
 
-// Определение для использования широких строк в Windows
 #ifdef OS_WINDOWS
 using tstring = std::wstring;
 #define tcout std::wcout
@@ -25,7 +24,6 @@ using tstring = std::string;
 #define tcin std::cin
 #endif
 
-// Вспомогательные функции для преобразования кодировок
 tstring toTString(const std::string& str);
 std::string toString(const tstring& str);
 
@@ -51,7 +49,6 @@ private:
     void registerCommands();
     std::vector<std::string> parseCommand(const std::string& input);
     
-    // Команды файлового менеджера
     void listDirectory(const std::vector<std::string>& args);
     void copyFile(const std::vector<std::string>& args);
     void moveFile(const std::vector<std::string>& args);
@@ -62,7 +59,6 @@ private:
     void showHelp(const std::vector<std::string>& args);
     void exitProgram(const std::vector<std::string>& args);
     
-    // Вспомогательные функции
     void copyRecursive(const fs::path& source, const fs::path& dest);
     bool matchWildcard(const std::string& name, const std::string& pattern);
     void findRecursive(const fs::path& dir, const std::string& pattern, std::vector<fs::path>& results);
