@@ -12,16 +12,13 @@
 int main() {
     try {
 #ifdef OS_WINDOWS
-        // Настройка кодовой страницы для корректного отображения кириллицы
         SetConsoleOutputCP(1251);
         SetConsoleCP(1251);
         
-        // Настройка стандартных потоков для работы с юникодом
         _setmode(_fileno(stdout), _O_U16TEXT);
         _setmode(_fileno(stdin), _O_TEXT);
         _setmode(_fileno(stderr), _O_U16TEXT);
 #else
-        // Настройка локали с поддержкой UTF-8
         std::locale::global(std::locale("en_US.UTF-8"));
 #endif
         
